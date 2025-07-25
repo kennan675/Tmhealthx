@@ -22,7 +22,7 @@ const Events = () => {
     },
     {
       id: 2,
-      title: 'Youth Leadership Forum',
+      title: 'Youth Leadership',
       date: '2025-02-20',
       location: 'Nairobi',
       type: 'Forum',
