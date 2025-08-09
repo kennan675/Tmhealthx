@@ -116,7 +116,7 @@ const Events = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl text-gray-600 max-w-3xl mx-auto"
             >
-              Join us in transforming health outcomes across Kenya through community events, medical camps, and youth empowerment initiatives.
+              Discover our upcoming health forums, webinars, and local missions designed to empower communities and build health advocacy capacity.
             </motion.p>
           </div>
         </div>

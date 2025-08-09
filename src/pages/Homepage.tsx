@@ -1,36 +1,41 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Users, Target, BookOpen, Zap, Calendar, Heart, Award } from 'lucide-react';
+import { ArrowRight, Users, Target, BookOpen, Zap, Calendar, Heart, Award, Globe, Stethoscope } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Homepage = () => {
   const stats = [
-    { label: 'Communities Reached', value: '50+', icon: Users },
-    { label: 'Youth Leaders Trained', value: '50+', icon: Award },
-    { label: 'Events Conducted', value: '10+', icon: Calendar },
-    { label: 'Partnerships Formed', value: '5+', icon: Heart },
+    { label: 'Counties Engaged', value: '47+', icon: Globe },
+    { label: 'Youth Advocates', value: '1,000+', icon: Users },
+    { label: 'Community Health Sessions', value: '500+', icon: Heart },
+    { label: 'Partnerships Formed', value: '15+', icon: Award },
   ];
 
-  const missionPoints = [
+  const coreValues = [
     {
-      title: 'Mobilize',
-      description: 'Bringing communities together for health transformation',
-      icon: Users,
+      title: 'Equity',
+      description: 'Ensuring fair access to health services for all',
+      icon: Target,
     },
     {
-      title: 'Educate',
-      description: 'Empowering through health knowledge and awareness',
-      icon: BookOpen,
-    },
-    {
-      title: 'Empower',
-      description: 'Building capacity for sustainable health solutions',
+      title: 'Innovation',
+      description: 'Pioneering new approaches to health challenges',
       icon: Zap,
     },
     {
-      title: 'Transform',
-      description: 'Creating lasting change in health outcomes',
-      icon: Target,
+      title: 'Service',
+      description: 'Dedicated commitment to community wellbeing',
+      icon: Heart,
+    },
+    {
+      title: 'Integrity',
+      description: 'Maintaining transparency and ethical practices',
+      icon: Award,
+    },
+    {
+      title: 'Pan-African Unity',
+      description: 'Building connections across the continent',
+      icon: Globe,
     },
   ];
 
@@ -46,7 +51,7 @@ const Homepage = () => {
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-6xl font-bold mb-6"
             >
-              Transforming Health, One Community at a Time
+              For Africa. By Africa. With the World.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -54,7 +59,7 @@ const Homepage = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
             >
-              A Youth Revolution for Health Justice. Community First. Science Guided. Impact Driven.
+              Transforming healthcare from the grassroots.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -63,61 +68,117 @@ const Homepage = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
-                to="/membership"
+                to="/join"
                 className="bg-white text-green-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors inline-flex items-center"
               >
-                Join Now
+                Join the Movement
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
-                to="/events"
+                to="/virtual-clinic"
                 className="border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-green-600 transition-colors"
               >
-                View Events
+                Book a Consultation
               </Link>
-              <button className="bg-green-800 text-white px-8 py-3 rounded-md font-semibold hover:bg-green-900 transition-colors">
-                Donate
-              </button>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Mission Statement */}
+      {/* About Preview */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Empowering Youth. Transforming Health.
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                TM HealthX Kenya is a youth-led, community-rooted health advocacy and innovation movement. 
+                We empower, educate, and mobilize young people to lead health advocacy, access, and transformation across Kenya.
+              </p>
+              <Link
+                to="/about"
+                className="bg-green-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-green-700 transition-colors inline-flex items-center"
+              >
+                Learn More
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Mission</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Core Values</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We operate on a 4-fold mission model designed to create sustainable health transformation
+              The principles that guide our movement toward health equity
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {missionPoints.map((point, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {coreValues.map((value, index) => (
               <motion.div
-                key={point.title}
+                key={value.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                  <point.icon className="h-8 w-8 text-green-600" />
+                  <value.icon className="h-8 w-8 text-green-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{point.title}</h3>
-                <p className="text-gray-600">{point.description}</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Feature Banner - Virtual Clinic */}
+      <section className="py-20 bg-blue-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="bg-white bg-opacity-20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Stethoscope className="h-10 w-10" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                New: Virtual Clinic Partnership
+              </h2>
+              <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+                Access specialized health consultations with top Indian specialists through our partnership with Global Cure Co. 
+                Quality healthcare, now accessible across Kenya.
+              </p>
+              <Link
+                to="/virtual-clinic"
+                className="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors inline-flex items-center"
+              >
+                Book Consultation
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="py-20 bg-green-600 text-white">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Impact</h2>
-            <p className="text-xl opacity-90">Making a difference across Kenya</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Impact</h2>
+            <p className="text-xl text-gray-600">Making a difference across Kenya</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -128,11 +189,11 @@ const Homepage = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="bg-white bg-opacity-20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="h-10 w-10" />
+                <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="h-10 w-10 text-green-600" />
                 </div>
-                <div className="text-4xl font-bold mb-2">{stat.value}</div>
-                <div className="text-lg opacity-90">{stat.label}</div>
+                <div className="text-4xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                <div className="text-lg text-gray-600">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -148,17 +209,17 @@ const Homepage = () => {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Ready to Join the Health Revolution?
+              Ready to Transform Healthcare?
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Be part of a movement that's transforming health outcomes across Kenya. Together, we can create lasting change.
+              Join a movement that's redefining healthcare from the grassroots. Together, we can build a healthier Africa.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/membership"
+                to="/join"
                 className="bg-green-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-green-700 transition-colors inline-flex items-center"
               >
-                Become a Member
+                Join the Movement
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
