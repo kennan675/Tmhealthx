@@ -134,8 +134,8 @@ const VirtualClinic = () => {
                   </div>
                 </div>
                 <div className="flex items-center mb-3">
-                  {.map((star) => (
-                    <Star key={star} className="h-5 w-5 text-yellow-400 fill-current" />
+                  {[...Array(5)].map((_, index) => (
+                    <Star key={index} className="h-5 w-5 text-yellow-400 fill-current" />
                   ))}
                   <span className="ml-2 text-gray-600">Dedicated Virtual Health Specialist</span>
                 </div>
