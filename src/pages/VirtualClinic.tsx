@@ -87,10 +87,10 @@ const VirtualClinic = () => {
                 <Stethoscope className="h-10 w-10" />
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Virtual Health Consultations – Now Accessible Across Kenya
+                TM HealthX Virtual Clinic
               </h1>
               <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-                Connect with top Indian specialists through TM HealthX's virtual clinic program.
+                Access quality healthcare consultations from anywhere in Kenya through our virtual clinic program.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
@@ -141,7 +141,7 @@ const VirtualClinic = () => {
                 </div>
               </div>
               <p className="text-gray-600 mb-6">
-                Dr. Polyne Wechuli is our dedicated lead physician for virtual consultations, providing accessible and quality healthcare. Global Cure Co (India) is a strategic partner, collaborating with us to connect Kenyan patients with further specialized medical assistance, such as for complex cases like cancer, and assisting with transportation costs.
+                Dr. Polyne Wechuli is our dedicated lead physician for virtual consultations, providing accessible and quality healthcare to patients across Kenya. She specializes in comprehensive health assessments and connects patients with appropriate care pathways when needed.
               </p>
             </motion.div>
             <motion.div
@@ -275,10 +275,10 @@ const VirtualClinic = () => {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Global Health Collaboration
+              Virtual Healthcare Access
             </h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-              Our virtual clinic service is led by Dr. Polyne Wechuli, providing accessible consultations. This initiative is part of a broader collaboration with Global Cure Co (India), aimed at increasing access to life-saving health services and facilitating specialized care. Follow our social media for upcoming Q&A Lives and testimonials.
+              Our virtual clinic service is led by Dr. Polyne Wechuli, providing accessible consultations to communities across Kenya. This initiative is part of our commitment to increasing access to quality health services and bridging healthcare gaps. Follow our social media for upcoming Q&A sessions and patient testimonials.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-green-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
