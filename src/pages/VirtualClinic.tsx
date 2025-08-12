@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Stethoscope, 
-  Globe, 
-  Phone, 
-  MessageSquare, 
-  CreditCard, 
-  CheckCircle, 
+import {
+  Stethoscope,
+  Globe,
+  Phone,
+  MessageSquare,
+  CreditCard,
+  CheckCircle,
   User,
   Calendar,
   Clock,
@@ -62,7 +62,7 @@ const VirtualClinic = () => {
     {
       step: 4,
       title: 'Get Connected',
-      description: 'Receive phone or video call from Dr. Jain',
+      description: 'Receive phone or video call from Dr. Wechuli',
       icon: CheckCircle
     }
   ];
@@ -93,7 +93,7 @@ const VirtualClinic = () => {
                 Connect with top Indian specialists through TM HealthX's virtual clinic program.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button 
+                <button
                   onClick={() => setShowPaymentForm(true)}
                   className="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors"
                 >
@@ -121,7 +121,7 @@ const VirtualClinic = () => {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Meet Dr. Khushbu Jain
+                Meet Dr. Polyne Wechuli
               </h2>
               <div className="bg-blue-50 p-6 rounded-lg mb-6">
                 <div className="flex items-center mb-4">
@@ -129,34 +129,20 @@ const VirtualClinic = () => {
                     <User className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">Dr. Khushbu Jain</h3>
-                    <p className="text-blue-600 font-medium">Founder, Global Cure Co (India)</p>
+                    <h3 className="text-xl font-semibold text-gray-900">Dr. Polyne Wechuli</h3>
+                    <p className="text-blue-600 font-medium">Lead Virtual Clinic Physician</p>
                   </div>
                 </div>
                 <div className="flex items-center mb-3">
-                  {[1, 2, 3, 4, 5].map((star) => (
+                  {.map((star) => (
                     <Star key={star} className="h-5 w-5 text-yellow-400 fill-current" />
                   ))}
-                  <span className="ml-2 text-gray-600">Global Health Specialist</span>
+                  <span className="ml-2 text-gray-600">Dedicated Virtual Health Specialist</span>
                 </div>
               </div>
               <p className="text-gray-600 mb-6">
-                Dr. Khushbu Jain is the Founder of Global Cure Co (India) and a global health specialist 
-                in oncology, fertility, BMT, and neurorehabilitation. Through our partnership, you can now 
-                consult her from anywhere in Kenya.
+                Dr. Polyne Wechuli is our dedicated lead physician for virtual consultations, providing accessible and quality healthcare. Global Cure Co (India) is a strategic partner, collaborating with us to connect Kenyan patients with further specialized medical assistance, such as for complex cases like cancer, and assisting with transportation costs.
               </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-green-50 p-4 rounded-lg text-center">
-                  <Globe className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                  <p className="font-semibold text-gray-900">Global Expertise</p>
-                  <p className="text-sm text-gray-600">International standards</p>
-                </div>
-                <div className="bg-green-50 p-4 rounded-lg text-center">
-                  <CheckCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                  <p className="font-semibold text-gray-900">Proven Results</p>
-                  <p className="text-sm text-gray-600">Trusted by thousands</p>
-                </div>
-              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -167,7 +153,7 @@ const VirtualClinic = () => {
               <div className="bg-gradient-to-br from-blue-100 to-green-100 p-8 rounded-lg">
                 <img
                   src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=400"
-                  alt="Dr. Khushbu Jain"
+                  alt="Dr. Polyne Wechuli"
                   className="w-64 h-64 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg"
                 />
                 <div className="bg-white p-4 rounded-lg shadow-md">
@@ -268,7 +254,7 @@ const VirtualClinic = () => {
 
           <div className="text-center mt-12">
             <a
-              href="https://wa.me/254700000000"
+              href="https://wa.me/254740814465"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-green-700 transition-colors inline-flex items-center"
@@ -292,8 +278,7 @@ const VirtualClinic = () => {
               Global Health Collaboration
             </h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-              This service is part of a global collaboration between TM HealthX Kenya and Global Cure Co (India), 
-              aimed at increasing access to life-saving health services. Follow our social media for upcoming Q&A Lives and testimonials.
+              Our virtual clinic service is led by Dr. Polyne Wechuli, providing accessible consultations. This initiative is part of a broader collaboration with Global Cure Co (India), aimed at increasing access to life-saving health services and facilitating specialized care. Follow our social media for upcoming Q&A Lives and testimonials.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-green-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors">
@@ -411,13 +396,13 @@ const VirtualClinic = () => {
                 ✕
               </button>
             </div>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Select Consultation Type
                 </label>
-                <select 
+                <select
                   value={selectedConsultation}
                   onChange={(e) => setSelectedConsultation(e.target.value)}
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
