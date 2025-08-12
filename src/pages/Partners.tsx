@@ -5,68 +5,12 @@ import { Building, Heart, Users, Award, Globe, HandHeart } from 'lucide-react';
 const Partners = () => {
   const partners = [
     {
-      name: 'World Health Organization',
+      name: 'Global Cure Co',
       type: 'International',
       logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Global health policy and technical support',
-      collaboration: 'Health system strengthening initiatives',
+      description: 'Connecting Kenyan patients with specialized medical care, including assistance with transportation costs for complex cases like cancer',
+      collaboration: 'Facilitating referrals for specialized medical treatments and patient support',
       icon: Globe
-    },
-    {
-      name: 'Kenya Medical Training College',
-      type: 'Educational',
-      logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Medical education and training partnership',
-      collaboration: 'Youth health professional development',
-      icon: Award
-    },
-    {
-      name: 'Ministry of Health Kenya',
-      type: 'Government',
-      logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Policy advocacy and implementation support',
-      collaboration: 'National health strategy alignment',
-      icon: Building
-    },
-    {
-      name: 'FUMSA',
-      type: 'NGO',
-      logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Medical students and youth health advocacy',
-      collaboration: 'Joint advocacy campaigns and events',
-      icon: Users
-    },
-    {
-      name: 'Kisumu County Health Department',
-      type: 'Local Government',
-      logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Local health service delivery',
-      collaboration: 'Community health programs',
-      icon: Heart
-    },
-    {
-      name: 'African Population and Health Research Center',
-      type: 'Research',
-      logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Research collaboration and evidence generation',
-      collaboration: 'Health research and policy analysis',
-      icon: Globe
-    },
-    {
-      name: 'Kenya Red Cross Society',
-      type: 'Humanitarian',
-      logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Emergency response and community health',
-      collaboration: 'Disaster preparedness and response',
-      icon: HandHeart
-    },
-    {
-      name: 'Jaramogi Oginga Odinga University',
-      type: 'Educational',
-      logo: 'https://images.pexels.com/photos/5938567/pexels-photo-5938567.jpeg?auto=compress&cs=tinysrgb&w=400',
-      description: 'Academic research and student engagement',
-      collaboration: 'Youth leadership development',
-      icon: Award
     }
   ];
 
@@ -81,19 +25,19 @@ const Partners = () => {
       title: 'Implementation Partners',
       description: 'On-ground program delivery and support',
       icon: Users,
-      count: 12
+      count: 1
     },
     {
       title: 'Funding Partners',
       description: 'Financial support for programs and initiatives',
       icon: HandHeart,
-      count: 8
+      count: 0
     },
     {
       title: 'Knowledge Partners',
       description: 'Research and technical expertise sharing',
       icon: Globe,
-      count: 10
+      count: 1
     }
   ];
 
@@ -216,10 +160,10 @@ const Partners = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { metric: '35+', label: 'Active Partners', icon: Building },
-              { metric: '15', label: 'Counties Reached', icon: Globe },
-              { metric: '25', label: 'Joint Programs', icon: Users },
-              { metric: '100K+', label: 'Lives Impacted', icon: Heart },
+              { metric: '1', label: 'Active Partner', icon: Building },
+              { metric: '47+', label: 'Counties Reached', icon: Globe },
+              { metric: '1', label: 'Joint Program', icon: Users },
+              { metric: '1,000+', label: 'Lives Impacted', icon: Heart },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
