@@ -9,7 +9,7 @@ import Leadership from './pages/Leadership';
 import Events from './pages/Events';
 import Programs from './pages/Programs';
 import VirtualClinic from './pages/VirtualClinic';
-import JoinUs from './pages/JoinUs';
+import Membership from './pages/Membership';
 import Resources from './pages/Resources';
 import Partners from './pages/Partners';
 import Contact from './pages/Contact';
@@ -31,7 +31,7 @@ function App() {
             <Route path="/programs" element={<Programs />} />
             <Route path="/virtual-clinic" element={<VirtualClinic />} />
             <Route path="/events" element={<Events />} />
-            <Route path="/join" element={<JoinUs />} />
+            <Route path="/join" element={<Membership />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/contact" element={<Contact />} />
