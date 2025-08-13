@@ -10,9 +10,9 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
+    { name: 'Virtual Clinic', path: '/virtual-clinic' },
     { name: 'Leadership', path: '/leadership' },
     { name: 'Programs', path: '/programs' },
-    { name: 'Virtual Clinic', path: '/virtual-clinic' },
     { name: 'Events', path: '/events' },
     { name: 'Join Us', path: '/join' },
     { name: 'Resources', path: '/resources' },
