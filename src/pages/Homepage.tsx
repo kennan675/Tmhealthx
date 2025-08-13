@@ -155,11 +155,11 @@ const Homepage = () => {
                 <Stethoscope className="h-10 w-10" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                New: Virtual Clinic Partnership
+                New: Global Cure Co Partnership
               </h2>
               <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
                 Access specialized health consultations with top Indian specialists through our partnership with Global Cure Co. 
-                Quality healthcare, now accessible across Kenya.
+                Quality healthcare.
               </p>
               <Link
                 to="/virtual-clinic"
