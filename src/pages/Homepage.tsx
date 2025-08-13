@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 const Homepage = () => {
   const stats = [
     { label: 'Counties Engaged', value: '47+', icon: Globe },
-    { label: 'Youth Advocates', value: '1,000+', icon: Users },
-    { label: 'Community Health Sessions', value: '500+', icon: Heart },
-    { label: 'Partnerships Formed', value: '15+', icon: Award },
+    { label: 'Youth Advocates', value: '1,00+', icon: Users },
+    { label: 'Community Health Sessions', value: '50+', icon: Heart },
+    { label: 'Partnerships Formed', value: '2+', icon: Award },
   ];
 
   const coreValues = [
