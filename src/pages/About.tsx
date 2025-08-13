@@ -186,9 +186,9 @@ const About = () => {
           </div>
           <div className="space-y-8">
             {[
-              { year: '2023', title: 'Foundation', description: 'TM HealthX Kenya officially launched in Kisumu' },
-              { year: '2024', title: 'Expansion', description: 'Reached 47+ counties across Kenya' },
-              { year: '2024', title: 'Global Partnership', description: 'Launched Virtual Clinic with Global Cure Co' },
+              { year: '2025', title: 'Foundation', description: 'TM HealthX Kenya officially launched in Kisumu' },
+              { year: '2025', title: 'Expansion', description: 'Reached 47+ counties across Kenya' },
+              { year: '2025', title: 'Global Partnership', description: 'Launched Virtual Clinic with Global Cure Co' },
               { year: '2025', title: 'Innovation Hub', description: 'Established digital health innovation center' },
             ].map((milestone, index) => (
               <motion.div
