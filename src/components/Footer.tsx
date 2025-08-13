@@ -10,9 +10,6 @@ const Footer = () => {
           {/* Logo & Mission */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-green-600 p-2 rounded-full">
-                <Heart className="h-6 w-6 text-white" />
-              </div>
               <span className="text-xl font-bold text-green-600">TM HealthX Kenya</span>
             </div>
             <p className="text-gray-600 mb-4 max-w-md">
