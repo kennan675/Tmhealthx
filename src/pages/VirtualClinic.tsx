@@ -152,7 +152,7 @@ const VirtualClinic = () => {
             >
               <div className="bg-gradient-to-br from-blue-100 to-green-100 p-8 rounded-lg">
                 <img
-                  src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=400"
+                  src="https://i.ibb.co/chtD8LJr/dr-polyne.jpg"
                   alt="Dr. Polyne Wechuli"
                   className="w-64 h-64 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg"
                 />
