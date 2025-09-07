@@ -1,97 +1,45 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Building, Award, Star, Check, ArrowRight } from 'lucide-react';
+import { Users, Check, ArrowRight, Send, AlertCircle } from 'lucide-react';
+import { supabase } from '../lib/supabaseClient';
 
 const Membership = () => {
-  const [activeCategory, setActiveCategory] = useState('ordinary');
   const [showApplication, setShowApplication] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [submitError, setSubmitError] = useState('');
 
-  const categories = [
-    {
-      id: 'ordinary',
-      name: 'Ordinary Membership',
-      icon: Users,
-      description: 'For individuals passionate about health transformation',
-      price: 'KSh 500/year',
-      eligibility: [
-        'Kenyan citizen or resident',
-        'Commitment to health advocacy',
-        'Age 18 years and above',
-        'Agree to constitution and code of ethics'
-      ],
-      privileges: [
-        'Voting rights in general meetings',
-        'Access to all programs and resources',
-        'Networking opportunities',
-        'Monthly newsletters and updates',
-        'Training and capacity building'
-      ],
-      color: 'bg-blue-50 border-blue-200'
-    },
-    {
-      id: 'associate',
-      name: 'Associate Membership',
-      icon: Building,
-      description: 'For organizations and institutions',
-      price: 'KSh 2,500/year',
-      eligibility: [
-        'Registered organization in Kenya',
-        'Aligned with TM HealthX mission',
-        'Letter of intent from leadership',
-        'Commitment to partnership activities'
-      ],
-      privileges: [
-        'Representation at board meetings',
-        'Collaborative program opportunities',
-        'Joint advocacy initiatives',
-        'Access to research and resources',
-        'Co-branding opportunities'
-      ],
-      color: 'bg-green-50 border-green-200'
-    },
-    {
-      id: 'institutional',
-      name: 'Institutional Membership',
-      icon: Award,
-      description: 'For major institutions and corporate partners',
-      price: 'KSh 10,000/year',
-      eligibility: [
-        'Established institution/corporation',
-        'Significant health sector presence',
-        'Board resolution supporting membership',
-        'Commitment to substantial partnership'
-      ],
-      privileges: [
-        'Strategic partnership opportunities',
-        'Board representation consideration',
-        'Priority access to new programs',
-        'Exclusive networking events',
-        'Joint research opportunities'
-      ],
-      color: 'bg-purple-50 border-purple-200'
-    },
-    {
-      id: 'honorary',
-      name: 'Honorary Membership',
-      icon: Star,
-      description: 'For distinguished individuals with exceptional contributions',
-      price: 'By invitation only',
-      eligibility: [
-        'Exceptional contribution to health',
-        'Recognition by the organization',
-        'Nomination by existing members',
-        'Approval by the board'
-      ],
-      privileges: [
-        'Lifetime membership status',
-        'Advisory role opportunities',
-        'Special recognition at events',
-        'Mentorship program participation',
-        'Legacy project involvement'
-      ],
-      color: 'bg-yellow-50 border-yellow-200'
-    }
-  ];
+  const [formData, setFormData] = useState({
+    full_name: '',
+    email_address: '',
+    phone_number: '',
+    membership_category: 'ordinary',
+    motivation_letter: '',
+    agreed_to_terms: false
+  });
+
+  // Only ordinary membership category
+  const membershipCategory = {
+    id: 'ordinary',
+    name: 'Ordinary Membership',
+    icon: Users,
+    description: 'For individuals passionate about health transformation',
+    price: 'KSh 500/year',
+    eligibility: [
+      'Kenyan citizen or resident',
+      'Commitment to health advocacy',
+      'Age 18 years and above',
+      'Agree to constitution and code of ethics'
+    ],
+    privileges: [
+      'Voting rights in general meetings',
+      'Access to all programs and resources',
+      'Networking opportunities',
+      'Monthly newsletters and updates',
+      'Training and capacity building'
+    ],
+    color: 'bg-blue-50 border-blue-200'
+  };
 
   const applicationProcess = [
     {
@@ -120,7 +68,70 @@ const Membership = () => {
     }
   ];
 
-  const currentCategory = categories.find(cat => cat.id === activeCategory);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+    setSubmitError('');
+
+    try {
+      const { data, error } = await supabase
+        .from('membership_applications')
+        .insert([
+          {
+            full_name: formData.full_name,
+            email_address: formData.email_address,
+            phone_number: formData.phone_number,
+            membership_category: formData.membership_category,
+            motivation_letter: formData.motivation_letter,
+            agreed_to_terms: formData.agreed_to_terms
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
+
+      setSubmitMessage('Application submitted successfully! We will review your application and get back to you soon.');
+      setFormData({
+        full_name: '',
+        email_address: '',
+        phone_number: '',
+        membership_category: 'ordinary',
+        motivation_letter: '',
+        agreed_to_terms: false
+      });
+      
+      // Close modal after 3 seconds
+      setTimeout(() => {
+        setShowApplication(false);
+        setSubmitMessage('');
+      }, 3000);
+
+    } catch (error: any) {
+      console.error('Error submitting application:', error);
+      setSubmitError(error.message || 'An error occurred while submitting your application. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    
+    if (type === 'checkbox') {
+      const checked = (e.target as HTMLInputElement).checked;
+      setFormData({
+        ...formData,
+        [name]: checked
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -142,104 +153,78 @@ const Membership = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl text-gray-600 max-w-3xl mx-auto"
             >
-              Become part of Kenya's premier youth-led health organization. Choose the membership category that best fits your profile and commitment level.
+              Become part of Kenya's premier youth-led health organization. Join as an Ordinary Member and be part of the healthcare transformation.
             </motion.p>
           </div>
         </div>
       </section>
 
-      {/* Membership Categories */}
+      {/* Membership Category */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Membership Categories
+              Ordinary Membership
             </h2>
             <p className="text-xl text-gray-600">
-              Four distinct membership levels to match your level of engagement
+              Join our community of health advocates and change-makers
             </p>
           </div>
 
-          {/* Category Selector */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-            {categories.map((category) => (
-              <motion.button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`p-6 rounded-lg border-2 transition-all ${
-                  activeCategory === category.id
-                    ? 'border-green-500 bg-green-50 shadow-lg'
-                    : 'border-gray-200 hover:border-green-300'
-                }`}
-              >
-                <category.icon className={`h-8 w-8 mx-auto mb-3 ${
-                  activeCategory === category.id ? 'text-green-600' : 'text-gray-500'
-                }`} />
-                <h3 className="font-semibold text-gray-900 mb-2">{category.name}</h3>
-                <p className="text-sm text-gray-600">{category.price}</p>
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Selected Category Details */}
-          {currentCategory && (
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className={`border-2 rounded-lg p-8 ${currentCategory.color}`}
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <div className="flex items-center mb-4">
-                    <currentCategory.icon className="h-8 w-8 text-green-600 mr-3" />
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900">{currentCategory.name}</h3>
-                      <p className="text-lg text-green-600 font-semibold">{currentCategory.price}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 mb-6">{currentCategory.description}</p>
-                  
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 mb-3">Eligibility Requirements:</h4>
-                    <ul className="space-y-2">
-                      {currentCategory.eligibility.map((requirement, index) => (
-                        <li key={index} className="flex items-start">
-                          <Check className="h-5 w-5 text-green-600 mr-2 mt-0.5" />
-                          <span className="text-gray-700">{requirement}</span>
-                        </li>
-                      ))}
-                    </ul>
+          {/* Membership Details */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className={`border-2 rounded-lg p-8 ${membershipCategory.color} max-w-4xl mx-auto`}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <div className="flex items-center mb-4">
+                  <membershipCategory.icon className="h-8 w-8 text-green-600 mr-3" />
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">{membershipCategory.name}</h3>
+                    <p className="text-lg text-green-600 font-semibold">{membershipCategory.price}</p>
                   </div>
                 </div>
-
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Member Privileges:</h4>
-                  <ul className="space-y-2 mb-6">
-                    {currentCategory.privileges.map((privilege, index) => (
+                <p className="text-gray-600 mb-6">{membershipCategory.description}</p>
+                
+                <div className="mb-6">
+                  <h4 className="font-semibold text-gray-900 mb-3">Eligibility Requirements:</h4>
+                  <ul className="space-y-2">
+                    {membershipCategory.eligibility.map((requirement, index) => (
                       <li key={index} className="flex items-start">
                         <Check className="h-5 w-5 text-green-600 mr-2 mt-0.5" />
-                        <span className="text-gray-700">{privilege}</span>
+                        <span className="text-gray-700">{requirement}</span>
                       </li>
                     ))}
                   </ul>
-                  
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setShowApplication(true)}
-                    className="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition-colors flex items-center justify-center"
-                  >
-                    Apply Now
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </motion.button>
                 </div>
               </div>
-            </motion.div>
-          )}
+
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-3">Member Privileges:</h4>
+                <ul className="space-y-2 mb-6">
+                  {membershipCategory.privileges.map((privilege, index) => (
+                    <li key={index} className="flex items-start">
+                      <Check className="h-5 w-5 text-green-600 mr-2 mt-0.5" />
+                      <span className="text-gray-700">{privilege}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowApplication(true)}
+                  className="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition-colors flex items-center justify-center"
+                >
+                  Apply Now
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -290,30 +275,61 @@ const Membership = () => {
               <button
                 onClick={() => setShowApplication(false)}
                 className="text-gray-500 hover:text-gray-700"
+                disabled={isSubmitting}
               >
                 ✕
               </button>
             </div>
+
+            {/* Success Message */}
+            {submitMessage && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div className="flex items-center">
+                  <Check className="h-5 w-5 text-green-600 mr-2" />
+                  <p className="text-green-800">{submitMessage}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Error Message */}
+            {submitError && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div className="flex items-center">
+                  <AlertCircle className="h-5 w-5 text-red-600 mr-2" />
+                  <p className="text-red-800">{submitError}</p>
+                </div>
+              </div>
+            )}
             
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
+                    Full Name *
                   </label>
                   <input
                     type="text"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
+                    name="full_name"
+                    value={formData.full_name}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 disabled:bg-gray-100"
                     placeholder="Enter your full name"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
+                    Email Address *
                   </label>
                   <input
                     type="email"
-                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
+                    name="email_address"
+                    value={formData.email_address}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 disabled:bg-gray-100"
                     placeholder="Enter your email"
                   />
                 </div>
@@ -321,11 +337,16 @@ const Membership = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number
+                  Phone Number *
                 </label>
                 <input
                   type="tel"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
+                  name="phone_number"
+                  value={formData.phone_number}
+                  onChange={handleChange}
+                  required
+                  disabled={isSubmitting}
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 disabled:bg-gray-100"
                   placeholder="Enter your phone number"
                 />
               </div>
@@ -334,45 +355,46 @@ const Membership = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Membership Category
                 </label>
-                <select className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600">
-                  {categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
+                <select 
+                  name="membership_category"
+                  value={formData.membership_category}
+                  onChange={handleChange}
+                  disabled={true}
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 bg-gray-100"
+                >
+                  <option value="ordinary">Ordinary Membership - KSh 500/year</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Motivation Letter
+                  Motivation Letter *
                 </label>
                 <textarea
+                  name="motivation_letter"
+                  value={formData.motivation_letter}
+                  onChange={handleChange}
                   rows={4}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
+                  required
+                  disabled={isSubmitting}
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600 disabled:bg-gray-100"
                   placeholder="Tell us why you want to join TM HealthX Kenya..."
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload CV/Resume
-                </label>
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"
                 />
               </div>
 
               <div className="flex items-center">
                 <input
                   type="checkbox"
-                  id="terms"
-                  className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                  id="agreed_to_terms"
+                  name="agreed_to_terms"
+                  checked={formData.agreed_to_terms}
+                  onChange={handleChange}
+                  required
+                  disabled={isSubmitting}
+                  className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded disabled:bg-gray-100"
                 />
-                <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                  I agree to the TM HealthX Kenya constitution and code of ethics
+                <label htmlFor="agreed_to_terms" className="ml-2 block text-sm text-gray-700">
+                  I agree to the TM HealthX Kenya constitution and code of ethics *
                 </label>
               </div>
 
@@ -380,15 +402,27 @@ const Membership = () => {
                 <button
                   type="button"
                   onClick={() => setShowApplication(false)}
-                  className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-md hover:bg-gray-50 transition-colors"
+                  disabled={isSubmitting}
+                  className="flex-1 border border-gray-300 text-gray-700 py-3 rounded-md hover:bg-gray-50 transition-colors disabled:bg-gray-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition-colors"
+                  disabled={isSubmitting || !formData.agreed_to_terms}
+                  className="flex-1 bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400 flex items-center justify-center"
                 >
-                  Submit Application
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      Submit Application
+                    </>
+                  )}
                 </button>
               </div>
             </form>
