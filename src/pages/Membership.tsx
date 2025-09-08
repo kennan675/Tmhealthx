@@ -74,6 +74,29 @@ const Membership = () => {
     setSubmitMessage('');
     setSubmitError('');
 
+    // Check if we're using demo Supabase credentials
+    if (supabase.supabaseUrl.includes('demo.supabase.co')) {
+      // Demo mode - just show success message without actually saving
+      setTimeout(() => {
+        setSubmitMessage('Demo mode: Application received! In production, this would be saved to the database. Please set up your Supabase credentials to enable real data saving.');
+        setFormData({
+          full_name: '',
+          email_address: '',
+          phone_number: '',
+          membership_category: 'ordinary',
+          motivation_letter: '',
+          agreed_to_terms: false
+        });
+        setIsSubmitting(false);
+        
+        // Close modal after 5 seconds in demo mode
+        setTimeout(() => {
+          setShowApplication(false);
+          setSubmitMessage('');
+        }, 5000);
+      }, 1000);
+      return;
+    }
     try {
       const { data, error } = await supabase
         .from('membership_applications')
