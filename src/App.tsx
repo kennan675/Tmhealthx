@@ -14,18 +14,10 @@ import Resources from './pages/Resources';
 import Partners from './pages/Partners';
 import Contact from './pages/Contact';
 
-// Lazy load the 3D background for performance
-const ThreeBackground = lazy(() => import('./components/ThreeBackground'));
-
 function App() {
   return (
     <Router>
       <div className="min-h-screen relative">
-        {/* 3D Background */}
-        <Suspense fallback={null}>
-          <ThreeBackground />
-        </Suspense>
-
         {/* Main Content */}
         <div className="relative z-10">
           <Navbar />
